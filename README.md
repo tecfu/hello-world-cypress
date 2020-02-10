@@ -6,7 +6,7 @@ This repo shows a basic example of using Cypress and Docker Compose to create si
 
 For more information, see the blog post, ["Easy End-to-End Testing with Cypress."](https://mtlynch.io/painless-web-app-testing)
 
-## Run the test app
+## Run and test app using docker 
 
 The example application is called Sentimentalyzer, a very rudimentary text sentiment analyzer. To run it, enter the following commands:
 
@@ -20,11 +20,17 @@ docker run \
   sentimentalyzer
 ```
 
-The app will be running on [localhost:8123](http://localhost:8123).
+The app will be running on [localhost:8123](http://localhost:8123), and you can 
+now run the e2e tests from within the hello-world-cypress directory.
 
-## Run end-to-end tests
+```bash
+cd hello-world-cypress
+docker run -it -v $PWD/e2e:/e2e -w /e2e --network host -e CYPRESS_baseUrl=http://localhost:8123 cypress/included:4.0.1
+```
 
-To execute the end-to-end tests for Sentimentalyzer, enter the followinng commands:
+## Run and test app using docker-compose
+
+To execute Sentimentalyzer and run end-to-end tests, enter the following commands:
 
 ```bash
 cd e2e
